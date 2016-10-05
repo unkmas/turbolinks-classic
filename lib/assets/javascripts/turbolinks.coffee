@@ -130,7 +130,14 @@ removeCurrentPageFromCache = ->
   delete pageCache[new ComponentUrl(currentState.url).absolute]
 
 pagesCached = (size = cacheSize) ->
-  cacheSize = parseInt(size) if /^[\d]+$/.test size
+  if /^[\d]+$/.test size
+    size = parseInt(size)
+    if size == 0
+      pageCache = {}
+      #for prop in pageCache
+      #  if (pageCache.hasOwnProperty(prop))
+      #    delete pageCache[prop]
+    cacheSize = size
 
 constrainPageCacheTo = (limit) ->
   pageCacheKeys = Object.keys pageCache
